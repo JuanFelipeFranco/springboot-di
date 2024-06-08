@@ -16,4 +16,9 @@ public class ProductService {
             return p;
         }).collect(Collectors.toList());
     }
+
+    public Product findById(Long id) {
+        return repository.findById(id);
+    }
+
 }
