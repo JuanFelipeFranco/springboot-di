@@ -10,13 +10,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService{
-
+    @Autowired
     private ProductRepository repository;
-
-    public ProductServiceImpl(ProductRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
     public List<Product> findAll() {
         return repository.findAll().stream().map(p -> {
