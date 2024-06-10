@@ -13,10 +13,10 @@ public class ProductServiceImpl implements ProductService{
 
     private ProductRepository repository;
 
-    @Autowired
-    public void setRepository(ProductRepository repository) {
+    public ProductServiceImpl(ProductRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public List<Product> findAll() {
         return repository.findAll().stream().map(p -> {
