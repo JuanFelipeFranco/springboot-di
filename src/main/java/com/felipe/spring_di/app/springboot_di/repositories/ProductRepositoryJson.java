@@ -1,5 +1,7 @@
 package com.felipe.spring_di.app.springboot_di.repositories;
 
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.felipe.spring_di.app.springboot_di.models.Product;
 import org.springframework.core.io.ClassPathResource;
@@ -15,8 +17,12 @@ public class ProductRepositoryJson implements ProductRepository{
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             list = Arrays.asList(objectMapper.readValue(resource.getFile(),Product[].class));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (StreamReadException e) {
+            e.printStackTrace();
+        } catch (DatabindException e) {
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -27,6 +33,6 @@ public class ProductRepositoryJson implements ProductRepository{
 
     @Override
     public Product findById(Long id) {
-        return null;
+        return list.stream().filter(p-> p.getId().equals(id)).findFirst().orElseThrow();
     }
 }
