@@ -25,11 +25,12 @@ public class ProductServiceImpl implements ProductService{
             Double priceTax = p.getPrice() * 1.25d;
             //Product newProduct = new Product(p.getId(),p.getName(),priceTax.longValue())
 //            p.setPrice(priceTax.longValue());
-//            Product newProduct = (Product) p.clone();
-//            newProduct.setPrice(priceTax.longValue());
-            p.setPrice(priceTax.longValue());
-            return p;
-//            return newProduct;
+            Product newProduct = (Product) p.clone();
+            newProduct.setPrice(priceTax.longValue());
+            return newProduct;
+//            p.setPrice(priceTax.longValue());
+//            return p;
+
         }).collect(Collectors.toList());
     }
 
